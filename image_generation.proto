@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package imagegeneration;
+
+// Define the request message
+message ImageRequest {
+    string prompt = 1;
+    string size = 2;
+    string api_key = 3;
+}
+
+// Define the response message
+message ImageResponse {
+    string image = 1;
+}
+
+// Define the gRPC service
+service ImageGenerationService {
+    rpc GenerateImage (ImageRequest) returns (ImageResponse);
+}
