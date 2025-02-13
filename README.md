@@ -164,13 +164,15 @@ if __name__ == "__main__":
 ---
 
 ## **Final Thoughts**
-The client server can directly call the Image Generation method on the gRPC server application on a different machine as if it were a local object, making it efficient and easier to create distributed applications and services.
-The benefits include:
-✅ Faster request processing due to HTTP/2
-✅ Reduced data overhead with Protocol Buffers
-✅ Strongly typed contracts for better API structure
+The `grpc_client.py` can directly call the Image Generation method on the `grpc_server.py` application on a different machine as if it were a local object, making it efficient and easier to create a distributed application and service.
 
-If you’re building a distributed, high-performance AI-powered API, consider making the switch to gRPC!
+The benefits include:
+
+- ✅ Faster request processing due to HTTP/2
+- ✅ Reduced data overhead with Protocol Buffers
+- ✅ Strongly typed contracts for better API structure
+
+If you’re building a distributed, high-performance API, consider making the switch to gRPC!
 
 Let me know if you’ve done a similar migration—I’d love to hear your thoughts! 🚀
 
