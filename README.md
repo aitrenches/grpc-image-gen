@@ -19,7 +19,12 @@ Given these benefits, gRPC was a natural choice for optimizing the API.
 
 ---
 
-## **Step 1: Defining the Protobuf Schema**
+## **Notes: **
+1. The image generation API already exists in `app.py` and is powered by Flask, a Python web framework.
+
+2. You can clone the repository, create a virtual environment, install dependencies, store environment variables in a `.env` file and follow along
+
+## **Step 1: Defining the Protobuf Schema `image_generation.proto` file**
 The first step in converting the REST API to gRPC is defining the `.proto` file, which serves as the contract for communication between the client and the server. Here’s the schema I created from the REST API parameters (i.e prompt, image size, and api key):
 
 ```proto
