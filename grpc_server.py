@@ -5,6 +5,7 @@ from concurrent import futures
 import image_generation_pb2
 import image_generation_pb2_grpc
 from dotenv import load_dotenv
+from image_utils import save_base64_image
 
 # Load environment variables
 load_dotenv()
@@ -23,13 +24,13 @@ class ImageGenerationService(image_generation_pb2_grpc.ImageGenerationServiceSer
         if request.api_key != os.getenv("API_SECRET_KEY"):
             context.set_code(grpc.StatusCode.PERMISSION_DENIED)
             context.set_details("Invalid API key")
-            return image_generation_pb2.ImageResponse(image="")
+            return image_generation_pb2.ImageResponse(image="", filename="")
 
         # Validate Prompt
         if not request.prompt:
             context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
             context.set_details("Prompt is required")
-            return image_generation_pb2.ImageResponse(image="")
+            return image_generation_pb2.ImageResponse(image="", filename="")
 
         try:
             response = client.images.generate(
@@ -39,11 +40,24 @@ class ImageGenerationService(image_generation_pb2_grpc.ImageGenerationServiceSer
                 size=request.size or "1024x1024",
                 response_format="b64_json"
             )
-            return image_generation_pb2.ImageResponse(image=response.data[0].b64_json)
+            base64_image = response.data[0].b64_json
+            
+            # Save the image to the images folder
+            filename = ""
+            try:
+                filename = save_base64_image(base64_image)
+            except Exception as save_error:
+                # If saving fails, log the error but still return the base64 data
+                print(f"Warning: Failed to save image: {str(save_error)}")
+            
+            return image_generation_pb2.ImageResponse(
+                image=base64_image,
+                filename=filename
+            )
         except Exception as e:
             context.set_code(grpc.StatusCode.INTERNAL)
             context.set_details(str(e))
-            return image_generation_pb2.ImageResponse(image="")
+            return image_generation_pb2.ImageResponse(image="", filename="")
 
 # Start the gRPC Server
 def serve():

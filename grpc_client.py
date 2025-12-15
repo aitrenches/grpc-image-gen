@@ -28,6 +28,15 @@ def generate_image(prompt, size="1024x1024"):
         response = stub.GenerateImage(request)
         print("Image Generated Successfully!")
         print(f"Base64 Image Data: {response.image[:100]}...")
+        
+        # Display saved image path if filename is available
+        if response.filename:
+            import os
+            images_dir = "images"
+            image_path = os.path.join(images_dir, response.filename)
+            print(f"Image saved as: {image_path}")
+        else:
+            print("Note: Image was not saved (no filename returned)")
     except grpc.RpcError as e:
         print(f"Error: {e.code()} - {e.details()}")
 

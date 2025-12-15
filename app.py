@@ -3,6 +3,7 @@ import openai
 from flask import Flask, request, jsonify
 from functools import wraps
 from dotenv import load_dotenv
+from image_utils import save_base64_image
 
 # Load environment variables
 load_dotenv()
@@ -45,7 +46,20 @@ def generate_image():
             size=size,
             response_format="b64_json"
         )
-        return jsonify({"image": response.data[0].b64_json})
+        base64_image = response.data[0].b64_json
+        
+        # Save the image to the images folder
+        filename = None
+        try:
+            filename = save_base64_image(base64_image)
+        except Exception as save_error:
+            # If saving fails, log the error but still return the base64 data
+            print(f"Warning: Failed to save image: {str(save_error)}")
+        
+        return jsonify({
+            "image": base64_image,
+            "filename": filename
+        })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

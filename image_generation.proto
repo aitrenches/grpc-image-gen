@@ -11,7 +11,8 @@ message ImageRequest {
 
 // Define the response message
 message ImageResponse {
-    string image = 1;
+    string image = 1;      // Base64 encoded image data
+    string filename = 2;   // Saved filename (e.g., "1704115200_a3f5b2.png")
 }
 
 // Define the gRPC service

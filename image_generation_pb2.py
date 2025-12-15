@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16image_generation.proto\x12\x0fimagegeneration\"=\n\x0cImageRequest\x12\x0e\n\x06prompt\x18\x01 \x01(\t\x12\x0c\n\x04size\x18\x02 \x01(\t\x12\x0f\n\x07\x61pi_key\x18\x03 \x01(\t\"\x1e\n\rImageResponse\x12\r\n\x05image\x18\x01 \x01(\t2h\n\x16ImageGenerationService\x12N\n\rGenerateImage\x12\x1d.imagegeneration.ImageRequest\x1a\x1e.imagegeneration.ImageResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16image_generation.proto\x12\x0fimagegeneration\"=\n\x0cImageRequest\x12\x0e\n\x06prompt\x18\x01 \x01(\t\x12\x0c\n\x04size\x18\x02 \x01(\t\x12\x0f\n\x07\x61pi_key\x18\x03 \x01(\t\"0\n\rImageResponse\x12\r\n\x05image\x18\x01 \x01(\t\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t2h\n\x16ImageGenerationService\x12N\n\rGenerateImage\x12\x1d.imagegeneration.ImageRequest\x1a\x1e.imagegeneration.ImageResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -34,7 +34,7 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_IMAGEREQUEST']._serialized_start=43
   _globals['_IMAGEREQUEST']._serialized_end=104
   _globals['_IMAGERESPONSE']._serialized_start=106
-  _globals['_IMAGERESPONSE']._serialized_end=136
-  _globals['_IMAGEGENERATIONSERVICE']._serialized_start=138
-  _globals['_IMAGEGENERATIONSERVICE']._serialized_end=242
+  _globals['_IMAGERESPONSE']._serialized_end=154
+  _globals['_IMAGEGENERATIONSERVICE']._serialized_start=156
+  _globals['_IMAGEGENERATIONSERVICE']._serialized_end=260
 # @@protoc_insertion_point(module_scope)
